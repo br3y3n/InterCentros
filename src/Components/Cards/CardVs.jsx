@@ -39,6 +39,9 @@ export const CardVs = ({ vs, cambiosRealizados }) => {
     console.log(response.data)
   }
 
+  const cerrarModalPlanillero =()=>{
+    setOpenModal(false)
+  }
   return (
     <>
     
@@ -107,7 +110,7 @@ export const CardVs = ({ vs, cambiosRealizados }) => {
 
       </div>
 
-      <BuscarPlanillero isOpen={openmodal} onPlanilleroSeleccionado={handlePlanilleroSeleccionado} />
+      <BuscarPlanillero isOpen={openmodal} onPlanilleroSeleccionado={handlePlanilleroSeleccionado} closeModal={cerrarModalPlanillero} />
       </article>
     )}
 </>

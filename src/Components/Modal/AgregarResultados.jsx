@@ -99,7 +99,7 @@ export const AgregarResultados = ({ modal, idVs ,idCampeonato, closeModal, equip
 
                                                             <>
                                                                 <tr className=" text-center">
-                                                                    <td className="border px-2 py-1">{integrantes.nombreJugador}</td>
+                                                                    <td className="border px-2 py-1">{integrantes.nombres}</td>
                                                                     <td className="border px-2 py-1"><input type="text" className='w-16 ' onChange={(e)=>agregarGoles(integrantes, e.target.value, 'equipo1')} /></td>
                                                                     <td className="border px-2 py-1"><input type="text" className='w-16 ' onChange={(e)=>agregarAmarillas(integrantes, e.target.value, 'equipo1')} /></td>
                                                                     <td className="border px-2 py-1"><input type="text" className='w-16 ' onChange={(e)=>agregarRojas(integrantes, e.target.value, 'equipo1')}/></td>
@@ -136,7 +136,7 @@ export const AgregarResultados = ({ modal, idVs ,idCampeonato, closeModal, equip
 
                                                             <>
                                                                 <tr className=" text-center">
-                                                                    <td className="border px-2 py-1">{integrantes.nombreJugador}</td>
+                                                                    <td className="border px-2 py-1">{integrantes.nombres}</td>
                                                                     <td className="border px-2 py-1"><input type="text" className='w-16 '  onChange={(e)=>agregarGoles(integrantes, e.target.value, 'equipo2')} /></td>
                                                                     <td className="border px-2 py-1"><input type="text" className='w-16 '  onChange={(e)=>agregarAmarillas(integrantes, e.target.value, 'equipo2')}/></td>
                                                                     <td className="border px-2 py-1"><input type="text" className='w-16 '  onChange={(e)=>agregarRojas(integrantes, e.target.value, 'equipo2')}/></td>

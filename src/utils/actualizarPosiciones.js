@@ -14,7 +14,6 @@ export const actualizarPosiciones =async(equipo1, equipo2,data1,data2)=>{
     amarillas: amarillas1 + data1.amarillas.reduce((total, amarillas) => total + parseInt(amarillas.amarillas), 0),
     rojas : rojas1 + data1.rojas.reduce((total, rojas) =>total + parseInt(rojas.rojas), 0)
    }
-   console.log(newData)
     const response = await axios.patch(`http://localhost:3001/posicionesIntercentros/${data._id}`,{
       pts:newData.pts,
       goles:newData.goles,
@@ -29,13 +28,10 @@ export const actualizarPosiciones =async(equipo1, equipo2,data1,data2)=>{
       amarillas: dataEQ2.data.amarillas + data2.amarillas.reduce((total, amarillas) =>total + parseInt(amarillas.amarillas), 0),
       rojas : dataEQ2.data.rojas + data2.rojas.reduce((total, rojas) =>total + parseInt(rojas.rojas), 0)
      }
-console.log(newData2)
      const response2 = await axios.patch(`http://localhost:3001/posicionesIntercentros/${dataEQ2.data._id}`,{
       pts:newData2.pts,
       goles:newData.goles,
       amarillas:newData.amarillas,
       rojas:newData2.rojas
     })
-    console.log(response2.data)
-
 }

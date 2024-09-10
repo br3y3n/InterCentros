@@ -9,10 +9,11 @@ export const PosicionesIntercentros = ({isOpen, close, id}) => {
             idCampeonato: id
         }
     })
+    responsePosiciones.data.sort((a,b)=> b.pts - a.pts)
     setEquipos(responsePosiciones.data)
         }
         obtenerPosiciones()
-    },[])
+    },[isOpen])
   return (
     <>
     {isOpen && ( 
@@ -39,25 +40,11 @@ export const PosicionesIntercentros = ({isOpen, close, id}) => {
            {equipos.map((vs, indice) => (
              <>
                <tr className="text-center">
-                 <td className="border px-2 py-1">{vs.equipo1.nombreEquipo}</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-               </tr>
-               <tr className="text-center">
-                 <td className="border px-2 py-1">{vs.equipo2.nombreEquipo}</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-               </tr>
-               <tr className="text-center">
-                 <td className="border px-2 py-1">{vs.equipo3.nombreEquipo}</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
-                 <td className="border px-2 py-1">0</td>
+                 <td className="border px-2 py-1">{vs.equipo.nombreEquipo}</td>
+                 <td className="border px-2 py-1">{vs.pts}</td>
+                 <td className="border px-2 py-1">{vs.goles}</td>
+                 <td className="border px-2 py-1">{vs.amarillas}</td>
+                 <td className="border px-2 py-1">{vs.rojas}</td>
                </tr>
              </>
            ))}

@@ -17,8 +17,8 @@ export const Ejecuccion = () => {
         })
         setVsEquipos(response.data)
 
-        // const vsLength = response.data.filter((item )=> item.estado == true)
-        if(response.data.length === 3){
+        const vsLength = response.data.filter((item )=> item.estado == true)
+        if(vsLength.length === 3){
             console.log("holl")
             setTimeout(()=>{
                 navigate(`/intercentros/resultados/${id}`)
@@ -27,7 +27,6 @@ export const Ejecuccion = () => {
     }
     obtenerVs()
    },[mostrarCambios])
-   console.log(vsEquipos.length)
  
    const infoActualizada =(cambios)=>{
     setMostrarCambios(!mostrarCambios)

@@ -22,14 +22,23 @@ export const Resultados = () => {
                idCampeonato: id
            }
        })
-       const responsePosiciones = await axios.get('http://localhost:3001/posicionesIntercentros',{
+       setEquipos(response.data)
+       
+       setVsEquipos(response.data)
+   }
+   obtenerVs()
+  },[modal])
+
+  useEffect(()=>{
+    const guardarPosiciones = async ()=>{
+      const responsePosiciones = await axios.get('http://localhost:3001/posicionesIntercentros',{
         headers:{
             idCampeonato: id
         }
     })
-    setEquipos(response.data)
+    console.log(responsePosiciones.data)
     if(responsePosiciones.data.length ===0){
-      const equipos = sacarEquipos(response.data)
+      const equipos = sacarEquipos(vsEquipos)
 
        const guardarEquipos = await Promise.all(
        equipos.map(async (item) => {
@@ -45,11 +54,9 @@ export const Resultados = () => {
      );
       console.log(guardarEquipos.data)
     }
-       setVsEquipos(response.data)
-   }
-   obtenerVs()
-  },[modal, equipos])
-
+    }
+    guardarPosiciones()
+  },[equipos])
  
   const abrirModal = (id)=>{
     setModal(true)

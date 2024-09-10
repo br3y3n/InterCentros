@@ -33,12 +33,13 @@ export const Inscripcion = () => {
       } else {
         alert("Equipo encontrado correctaente")
         const responseInscripcion = await axios.post(`http://localhost:3001/equipoInscripto`, {
-          Equipo: response.data,
+          Equipo: response.data.equipo,
           idCampeonato: id
         })
 
         alert(responseInscripcion.data.msg)
-        setEquipos(prev => [...prev, response.data])
+        console.log(response.data)
+        setEquipos(prev => [...prev, response.data.equipo])
       }
     } catch (error) {
       console.log(error)
@@ -52,7 +53,6 @@ export const Inscripcion = () => {
     }
   }, [equipos, equiposInscritos])
 
-  console.log(sorteo)
   const sorteoIntercentros = async () => {
     if(equipos.length === 3){
       const data= {
@@ -73,8 +73,6 @@ export const Inscripcion = () => {
     }
     navigate(`/intercentros/cronograma/${id}`)
   }
-  console.log(sorteo)
-  console.log(equiposInscritos)
   return (
     <article>
       {sorteo && equiposInscritos.length >0 ? '' :

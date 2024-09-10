@@ -1,5 +1,6 @@
 
 export const sacarEquipos = (data)=>{
+  console.log(data)
     const equiposMap = new Map();
     data.forEach(item => {
       equiposMap.set(item.equipo1._id, item.equipo1);
