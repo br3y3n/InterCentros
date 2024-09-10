@@ -7,7 +7,7 @@ export function calcularPuntos(golesE1, golesE2) {
         return { equipo1: 3, equipo2: 0 };
     } else if (golesEquipo2 > golesEquipo1) {
         return { equipo1: 0, equipo2: 3 };
-    } else {
+    } else if(golesEquipo1 == golesEquipo2){
         return { equipo1: 1, equipo2: 1 };
     }
 }

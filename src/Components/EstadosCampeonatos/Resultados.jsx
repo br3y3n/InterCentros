@@ -14,6 +14,7 @@ export const Resultados = () => {
   const [idVsResult, setIdVsResult] = useState()
   const [modalPosiciones, setModalPosiciones] = useState(false)
   const [equipos, setEquipos] = useState()
+  const [posicionesController, setPosicionesController] = useState()
   const { id } = useParams()
   useEffect(()=>{
    const obtenerVs = async ()=>{
@@ -36,10 +37,12 @@ export const Resultados = () => {
             idCampeonato: id
         }
     })
-    console.log(responsePosiciones.data)
-    if(responsePosiciones.data.length ===0){
+    if(responsePosiciones.data.length === 0){
+      setPosicionesController(true)
+      if(posicionesController){
+        return
+      }
       const equipos = sacarEquipos(vsEquipos)
-
        const guardarEquipos = await Promise.all(
        equipos.map(async (item) => {
          return await axios.post('http://localhost:3001/posicionesIntercentros', {
