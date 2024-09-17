@@ -5,6 +5,8 @@ import { AgregarResultados } from '../Modal/AgregarResultados'
 import { MirarResultados } from '../Modal/MirarResultados'
 import { sacarEquipos } from '../../utils/equiposUnicos'
 import { PosicionesIntercentros } from '../Modal/PosicionesIntercentros'
+import { obtenerGanadorFinal } from '../../utils/equipoGanador'
+import { CardGanador } from '../Cards/CardGanador'
 
 export const Resultados = () => {
   const [vsEquipos, setVsEquipos] = useState([])
@@ -15,6 +17,7 @@ export const Resultados = () => {
   const [modalPosiciones, setModalPosiciones] = useState(false)
   const [equipos, setEquipos] = useState()
   const [posicionesController, setPosicionesController] = useState()
+  const [equipoGanador, setEquipoGanador] = useState(false)
   const { id } = useParams()
   useEffect(()=>{
    const obtenerVs = async ()=>{
@@ -29,7 +32,25 @@ export const Resultados = () => {
    }
    obtenerVs()
   },[modal])
+//agregue effect para comprobar que todos los resultados estan subidos
+  useEffect(()=>{
+    const resultado = vsEquipos.map((item)=> item.estado === true)
+    const obteneGanador = async()=>{
+      if(resultado.length === 3){
+        const responsePosiciones = await axios.get('http://localhost:3001/posicionesIntercentros',{
+          headers:{
+              idCampeonato: id
+          }
+      })
 
+      //llamo la funcion para obtener el ganador
+      const equipo = obtenerGanadorFinal(responsePosiciones.data)
+      setEquipoGanador(equipo)
+        
+      }
+    }
+    obteneGanador()
+  },[vsEquipos])
   useEffect(()=>{
     const guardarPosiciones = async ()=>{
       const responsePosiciones = await axios.get('http://localhost:3001/posicionesIntercentros',{
@@ -86,6 +107,10 @@ export const Resultados = () => {
       onClick={()=>setModalPosiciones(true)}
       className='mt-10 ml-10 px-6 py-3 text-sm font-medium text-white bg-[#12aed1cd] border-none rounded-lg shadow-lg transition-all hover:bg-blue-600 hover:shadow-xl focus:opacity-90 focus:shadow-none active:opacity-80 active:shadow-none disabled:pointer-events-none disabled:opacity-50'>Mirar Posiciones</button>
     <section className='flex gap-11 mt-5 pr-10 pl-10'>
+      {equipoGanador ? 
+      <CardGanador equipo={equipoGanador} />  
+      :
+    
      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
@@ -139,6 +164,7 @@ export const Resultados = () => {
             
         </tbody>
     </table>
+}
 
           <PosicionesIntercentros isOpen={modalPosiciones} close={cerrarModalPosiciones} id={id} />
           <AgregarResultados modal={modal} idCampeonato={id} idVs={idVs} closeModal={cerrarModal} equipos={equipos} />
